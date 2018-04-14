@@ -36,6 +36,9 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
+    paths:
+        '%kernel.project_dir%/src/Helkiper/PostBundle/Resources/views/': HelkiperPostBundle
+
 # Doctrine Configuration
 doctrine:
     dbal:
