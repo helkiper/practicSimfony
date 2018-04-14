@@ -1,0 +1,7 @@
+{% extends '@HelkiperPostBundle/layout.html.twig' %}
+
+{% block title %}Latest posts{% endblock %}
+
+{% block body %}
+    {{ profiler_dump(posts) }}
+{% endblock %}
