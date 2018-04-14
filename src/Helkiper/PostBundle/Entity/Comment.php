@@ -40,13 +40,6 @@ class Comment
     /**
      * @var string
      *
-     * @ORM\Column(name="user", type="string")
-     */
-    private $user;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="content", type="string")
      */
     private $content;
@@ -67,30 +60,6 @@ class Comment
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set user.
-     *
-     * @param string $user
-     *
-     * @return Comment
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user.
-     *
-     * @return string
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**
