@@ -4,4 +4,11 @@
 
 {% block body %}
     {{ profiler_dump(posts) }}
+    <br />
+    <hr />
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Submit" />
+    {{ form_end(form) }}
 {% endblock %}

@@ -9,25 +9,38 @@
 namespace Helkiper\PostBundle\Controller;
 
 
+use Helkiper\PostBundle\Entity\Post;
+use Helkiper\PostBundle\PostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class PostController extends Controller
 {
     /**
-     * @return Response
-     *
      * @Route(name="post_index", path="/")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $posts = $em->getRepository('HelkiperPostBundle:Post')->findAll();
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($post);
+            $em->flush();
+
+            return new RedirectResponse($this->generateUrl('post_index'));
+        }
+
+        $post_list = $em->getRepository('HelkiperPostBundle:Post')->findAll();
 
         return $this->render('@HelkiperPostBundle/Post/index.html.twig', [
-            'posts' => $posts
+            'posts' => $post_list,
+            'form' => $form->createView()
         ]);
     }
 }
