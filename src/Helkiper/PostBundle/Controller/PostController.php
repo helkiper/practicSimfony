@@ -10,7 +10,7 @@ namespace Helkiper\PostBundle\Controller;
 
 
 use Helkiper\PostBundle\Entity\Post;
-use Helkiper\PostBundle\PostType;
+use Helkiper\PostBundle\Form\PostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
