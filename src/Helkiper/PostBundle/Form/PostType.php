@@ -29,7 +29,10 @@ class PostType extends AbstractType
             ->add('user')
             ->add('content')
             ->add('comments', CollectionType::class, [
-                'entry_type' => 'helkiper_post_comment'
+                'entry_type' => CommentType::class,
+                'entry_options' => ['label' => false],
+                'prototype' => true,
+                'allow_add' => true
             ]);
     }
 

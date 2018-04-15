@@ -1,6 +1,28 @@
 {% extends '@HelkiperPostBundle/layout.html.twig' %}
 
+{% form_theme form.comments _self %}
+
 {% block title %}Latest posts{% endblock %}
+
+{% block _comments_entry_widget %}
+    <li>
+        form_widget(comment.content)
+    </li>
+{% endblock %}
+
+{% block collection_widget %}
+    <ul
+        id="comment-fields-list"
+        data-prototype="{{ form_widget(form.vars.prototype) | e('html_attr') }}"
+        data-widget-tags="{{ '<li></li>' | e }}"
+    >
+        {% for comment in form %}
+        <li>{{ form_row(comment.content) }}</li>
+        {% endfor %}
+    </ul>
+
+    <button class="add-another-comment" data-list="#comment-fields-list">+</button>
+{% endblock %}
 
 {% block body %}
     {{ profiler_dump(posts) }}
@@ -8,14 +30,14 @@
     <hr />
 
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.user) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.comments) }}
     <input type="submit" value="Submit" />
     {{ form_end(form) }}
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('bundles/helkiperpost/js/jquery-3.3.1.min.js') }}"></script>
-    <script type="javascript">
-
-    </script>
+    <script src="{{ asset('bundles/helkiperpost/js/CollectionType.js') }}"></script>
 {% endblock %}
