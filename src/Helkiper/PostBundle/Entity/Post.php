@@ -27,16 +27,16 @@ class Post
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"persist"})
      */
     private $comments;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user", type="string")
+     * @ORM\Column(name="header", type="string")
      */
-    private $user;
+    private $header;
 
     /**
      * @var string
@@ -70,13 +70,13 @@ class Post
     /**
      * Set user.
      *
-     * @param string $user
+     * @param string $header
      *
      * @return Post
      */
-    public function setUser($user)
+    public function setHeader($header)
     {
-        $this->user = $user;
+        $this->header = $header;
 
         return $this;
     }
@@ -86,9 +86,9 @@ class Post
      *
      * @return string
      */
-    public function getUser()
+    public function getHeader()
     {
-        return $this->user;
+        return $this->header;
     }
 
     /**
@@ -149,6 +149,7 @@ class Post
     public function addComment(\Helkiper\PostBundle\Entity\Comment $comment)
     {
         $this->comments[] = $comment;
+        $comment->setPost($this);
 
         return $this;
     }

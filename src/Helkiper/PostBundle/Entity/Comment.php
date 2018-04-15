@@ -30,8 +30,6 @@ class Comment
     private $id;
 
     /**
-     * @var int
-     *
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */

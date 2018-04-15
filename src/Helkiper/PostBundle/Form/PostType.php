@@ -26,11 +26,12 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user')
+            ->add('header')
             ->add('content')
             ->add('comments', CollectionType::class, [
                 'entry_type' => CommentType::class,
                 'entry_options' => ['label' => false],
+                'by_reference' => false,
                 'prototype' => true,
                 'allow_add' => true
             ]);
