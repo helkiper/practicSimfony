@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends Controller
 {
@@ -41,6 +42,25 @@ class PostController extends Controller
         return $this->render('@HelkiperPostBundle/Post/index.html.twig', [
             'posts' => $post_list,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @Route(name="post_show", path="/show/{id}")
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('HelkiperPostBundle:Post')->find($id);
+
+        if ($post === null) {
+            throw new NotFoundHttpException('Not found');
+        }
+
+        return $this->render('@HelkiperPostBundle/Post/show.html.twig', [
+            'post' => $post
         ]);
     }
 }
