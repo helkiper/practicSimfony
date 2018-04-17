@@ -1,0 +1,11 @@
+textarea {
+    margin: 1em;
+    width: 300px;
+    height: 70px;
+}
+input {
+    margin: 10px;
+}
+#comment-fields-list li {
+    list-style: none;
+}

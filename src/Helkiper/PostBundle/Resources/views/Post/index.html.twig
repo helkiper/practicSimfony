@@ -1,13 +1,11 @@
-{% extends '@HelkiperPostBundle/layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% form_theme form.comments _self %}
 
 {% block title %}Latest posts{% endblock %}
 
-{% block _comments_entry_widget %}
-    <li>
-        form_widget(comment.content)
-    </li>
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/helkiperpost/css/main.css') }}">
 {% endblock %}
 
 {% block collection_widget %}
