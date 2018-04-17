@@ -37,7 +37,8 @@ class PostController extends Controller
             return new RedirectResponse($this->generateUrl('post_index'));
         }
 
-        $post_list = $em->getRepository('HelkiperPostBundle:Post')->findAll();
+        $postsOnPage = $this->getParameter('posts_on_page');
+        $post_list = $em->getRepository('HelkiperPostBundle:Post')->getLatest($postsOnPage);
 
         return $this->render('@HelkiperPostBundle/Post/index.html.twig', [
             'posts' => $post_list,

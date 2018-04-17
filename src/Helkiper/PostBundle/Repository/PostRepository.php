@@ -10,4 +10,16 @@ namespace Helkiper\PostBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getLatest($limit = null)
+    {
+        $qb = $this
+            ->createQueryBuilder('p')
+            ->addOrderBy('p.createdAt', 'DESC');
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }
